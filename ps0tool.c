@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     FILE        *f_in, *f_out;
     uint8_t     *b_in, *b_out;
     int          s_in,  s_out;
-	uint32_t     crc;
+    uint32_t     crc;
     zpr_header_t hdr;
     
     if (argc != 3)
@@ -60,11 +60,11 @@ int main(int argc, char **argv)
     
     s_out = uncompress(b_in, b_out);
 
-	if ((crc = crc_calculate(b_out, s_out)) != hdr.crc)
-	{
-		fprintf(stderr, "Error: Invalid CRC (calculated 0x%08x, stored 0x%08x)\n", crc, hdr.crc);
-		return 1;
-	}
+    if ((crc = crc_calculate(b_out, s_out)) != hdr.crc)
+    {
+        fprintf(stderr, "Error: Invalid CRC (calculated 0x%08x, stored 0x%08x)\n", crc, hdr.crc);
+        return 1;
+    }
 
     fwrite(b_out, 1, s_out, f_out);
     fclose(f_out);
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     free(b_out);
     
     printf("Successfully decompressed %s (0x%x bytes) to %s (0x%x bytes)\n",
-		argv[1], s_in, argv[2], s_out);
+        argv[1], s_in, argv[2], s_out);
     
     return 0;
 }
